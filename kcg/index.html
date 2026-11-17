@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>KasUbAy | UA Campus Guide</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />     
+    
+</head>
+
+<body>
+
+    <!-- TOP NAVIGATION -->
+    <header class="navbar">
+
+        <button class="header-button" id="searchToggle"
+            aria-label="Search locations">
+            <span class="search-icon"></span>
+        </button>
+
+        <div class="university-logo">
+            UA
+        </div>
+
+        <button class="header-button hamburger"
+            id="menuToggle" aria-label="Open menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+    </header>
+
+
+    <!-- SEARCH PANEL -->
+    <div class="search-panel" id="searchPanel">
+
+        <input
+            type="search"
+            id="locationSearch"
+            placeholder="Search campus locations..."
+            autocomplete="off"
+        >
+
+        <div id="searchResults"></div>
+
+    </div>
+
+
+    <!-- MENU PANEL -->
+    <div class="menu-panel" id="menuPanel">
+
+        <h3>KasUbAy</h3>
+
+        <button id="aboutButton">About KasUbAy</button>
+        <button id="resetButton">Reset Map</button>
+
+    </div>
+
+
+    <!-- MAIN CAMPUS MAP -->
+    <main class="map-container" id="mapContainer">
+
+        <div class="campus-map" id="campusMap"></div>
+
+
+        <!-- LOCATION INFORMATION -->
+        <div class="location-card hidden" id="locationCard">
+
+            <button class="close-card" id="closeCard">×</button>
+
+            <p class="card-label">CAMPUS LOCATION</p>
+
+            <h3 id="locationName">Location Name</h3>
+
+            <p id="locationDescription">
+                Location description goes here.
+            </p>
+
+        </div>
+
+
+        <!-- MASCOT GUIDANCE -->
+        <div class="mascot-container">
+
+            <div class="mascot-placeholder">
+                UA
+            </div>
+
+            <div class="mascot-tooltip">
+                Tap a marker to explore
+                campus locations!
+            </div>
+
+        </div>
+
+
+        <!-- CURRENT LOCATION CONTROL -->
+        <button class="locate-button" id="locateButton"
+            aria-label="Identify current location">
+
+            <span class="locate-circle"></span>
+
+        </button>
+
+
+        <!-- STATUS MESSAGE -->
+        <div class="status-message" id="statusMessage"></div>
+
+    </main>
+
+<!-- magic sauce-->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script src="js/locations.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/app.js"></script>
+
+</body>
+</html>
