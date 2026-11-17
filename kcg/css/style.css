@@ -1,7 +1,7 @@
 
-/* =================================
-   GENERAL SETTINGS
-================================= */
+/* =============================================
+   KASUBAY - MAIN STYLESHEET
+============================================= */
 
 * {
     margin: 0;
@@ -17,94 +17,71 @@ html, body {
 }
 
 
-/* =================================
+/* =============================================
    HEADER
-================================= */
+============================================= */
 
 .navbar {
     position: fixed;
     top: 0;
     left: 0;
-
     width: 100%;
     height: 100px;
-
     background: #e83939;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     padding: 0 18px;
-
-    z-index: 100;
+    z-index: 1100;
 }
 
 .header-button {
     width: 48px;
     height: 48px;
-
     border: none;
     background: transparent;
     cursor: pointer;
-
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-
-/* SEARCH ICON */
-
 .search-icon {
     width: 27px;
     height: 27px;
-
     border: 4px solid white;
     border-radius: 50%;
-
     position: relative;
 }
 
 .search-icon::after {
     content: "";
-
     position: absolute;
     width: 13px;
     height: 4px;
-
     background: white;
-
     right: -10px;
     bottom: -5px;
-
     transform: rotate(48deg);
     border-radius: 5px;
 }
 
-
-/* UNIVERSITY LOGO */
-
 .university-logo {
-    width: 52px;
-    height: 52px;
-
-    border-radius: 50%;
-
-    background: white;
-    border: 3px solid #ffffff;
-
+    width: 70px;
+    height: 70px;
     display: flex;
     align-items: center;
     justify-content: center;
-
-    color: #e83939;
-    font-weight: bold;
-    font-size: 18px;
+    overflow: hidden;
+    border-radius: 60%;
+    background: white;
 }
 
-
-/* HAMBURGER */
+.university-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
 
 .hamburger {
     flex-direction: column;
@@ -114,38 +91,32 @@ html, body {
 .hamburger span {
     width: 32px;
     height: 5px;
-
     background: white;
     border-radius: 5px;
 }
 
 
-/* =================================
-   MAP CONTAINER
-================================= */
+/* =============================================
+   MAP
+============================================= */
 
 .map-container {
     position: absolute;
-
     top: 100px;
     bottom: 0;
     left: 0;
     right: 0;
-
     overflow: hidden;
+    z-index: 1;
 }
 
 .campus-map {
     position: absolute;
     inset: 0;
-
     width: 100%;
     height: 100%;
-
     background: #dce5d9;
 }
-
-/* Leaflet map styling */
 
 .leaflet-container {
     width: 100%;
@@ -157,150 +128,209 @@ html, body {
     font-size: 9px !important;
 }
 
+.leaflet-marker-pane {
+    z-index: 650 !important;
+    pointer-events: auto !important;
+}
+
+.campus-marker-icon {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+}
+
+.campus-marker-icon .map-marker {
+    pointer-events: auto !important;
+}
+
+.leaflet-tooltip {
+    z-index: 700 !important;
+}
+
+
+/* =============================================
+   MAP MARKERS
+============================================= */
+
 .map-marker {
-    width: 25px;
-    height: 25px;
-
-    background: #f00035;
-
+    width: 28px;
+    height: 28px;
+    background: #e83939;
     border: 3px solid white;
     border-radius: 50% 50% 50% 0;
-
     transform: rotate(-45deg);
-
-    box-shadow: 0 2px 5px #00000050;
+    box-shadow: 0 2px 6px #00000050;
+    position: relative;
+    cursor: pointer;
 }
 
 .map-marker::after {
     content: "";
-
     position: absolute;
-
-    width: 7px;
-    height: 7px;
-
+    width: 8px;
+    height: 8px;
     background: white;
     border-radius: 50%;
-
-    top: 6px;
-    left: 6px;
-}
-
-.map-marker::after {
-    content: "";
-
-    position: absolute;
-
-    width: 7px;
-    height: 7px;
-
-    background: white;
-    border-radius: 50%;
-
-    top: 6px;
-    left: 6px;
+    top: 7px;
+    left: 7px;
 }
 
 .map-marker:hover {
     background: #b90029;
-    z-index: 5;
 }
 
 
-/* =================================
-   LOCATION CARD
-================================= */
+/* =============================================
+   LOCATION INFORMATION PANEL
+============================================= */
 
 .location-card {
     position: absolute;
-
-    bottom: 110px;
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    width: min(85%, 340px);
-
-    padding: 22px;
-
-    background: white;
-    border-radius: 12px;
-
-    box-shadow: 0 5px 20px #00000030;
-
-    z-index: 30;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    max-height: 75%;
+    z-index: 500;
+    background: #dedede;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 -4px 18px #00000020;
+    transition: max-height 0.3s ease;
 }
 
-.card-label {
-    font-size: 10px;
-    letter-spacing: 1px;
-    color: #e83939;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.location-card h3 {
-    margin-bottom: 10px;
-    color: #26352c;
-}
-
-.location-card p:last-child {
-    color: #68756b;
-    line-height: 1.5;
-    font-size: 13px;
-}
-
-.close-card {
-    position: absolute;
-    right: 12px;
-    top: 8px;
-
-    border: none;
-    background: none;
-
-    font-size: 25px;
-    cursor: pointer;
-}
-
-.hidden {
+.location-card.hidden {
     display: none;
 }
 
+/* RED COLLAPSIBLE BAR */
 
-/* =================================
+.location-panel-toggle {
+    width: 100%;
+    min-height: 65px;
+    flex-shrink: 0;
+    border: none;
+    background: #e83939;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    padding-right: 30px;
+    cursor: pointer;
+}
+.panel-chevron {
+    width: 20px;
+    height: 20px;
+    border-right: 4px solid white;
+    border-bottom: 4px solid white;
+    transform: rotate(45deg);
+    margin-top: -10px;
+    transition: transform 0.3s ease;
+}
+
+/* COLLAPSED STATE */
+
+.location-card.collapsed {
+    max-height: 55px;
+}
+
+.location-card.collapsed .location-card-content {
+    display: none;
+}
+
+.location-card.collapsed .panel-chevron {
+    transform: rotate(225deg);
+    margin-top: 10px;
+}
+
+/* INFORMATION CONTENT */
+
+.location-card-content {
+    width: 100%;
+    overflow-y: auto;
+    padding: 14px 10px 28px;
+    background: #dedede;
+}
+
+.location-photo {
+    display: block;
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    margin-bottom: 18px;
+}
+
+.location-photo.hidden {
+    display: none;
+}
+
+.location-details {
+    padding: 0 4px;
+}
+
+.location-card h3 {
+    color: #171717;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.4;
+    margin-bottom: 8px;
+}
+
+.location-description {
+    color: #555;
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+.location-info-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 55px;
+    border-top: 1px solid #b8b8b8;
+    padding: 10px 8px;
+}
+
+.location-info-row p {
+    color: #222;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.info-icon {
+    flex-shrink: 0;
+    font-size: 27px;
+    color: #222;
+}
+
+
+/* =============================================
    MASCOT
-================================= */
+============================================= */
 
 .mascot-container {
     position: absolute;
-
     bottom: 115px;
     left: 50%;
-
     transform: translateX(-50%);
-
     display: flex;
     flex-direction: column;
     align-items: center;
-
     z-index: 20;
-
     pointer-events: none;
 }
 
 .mascot-placeholder {
     width: 65px;
     height: 65px;
-
     border-radius: 50%;
-
     background: #e83939;
     border: 3px solid white;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     color: white;
     font-size: 22px;
     font-weight: bold;
@@ -308,80 +338,59 @@ html, body {
 
 .mascot-tooltip {
     background: white;
-
     padding: 13px 17px;
-
     border-radius: 10px;
-
     margin-top: 8px;
-
     font-size: 12px;
     font-weight: bold;
     line-height: 1.5;
-
     text-align: center;
-
     box-shadow: 0 3px 12px #00000020;
-
     max-width: 160px;
 }
 
 
-/* =================================
+/* =============================================
    LOCATE BUTTON
-================================= */
+============================================= */
 
 .locate-button {
     position: absolute;
-
     bottom: 25px;
     right: 18px;
-
     width: 65px;
     height: 65px;
-
     background: #e83939;
-
     border: 6px solid #a52222;
     border-radius: 50%;
-
     display: flex;
     justify-content: center;
     align-items: center;
-
     cursor: pointer;
-
     z-index: 25;
 }
 
 .locate-circle {
     width: 29px;
     height: 29px;
-
     background: white;
     border-radius: 50%;
 }
 
 
-/* =================================
+/* =============================================
    SEARCH AND MENU PANELS
-================================= */
+============================================= */
 
 .search-panel,
 .menu-panel {
     position: fixed;
-
     top: 110px;
-    z-index: 110;
-
+    z-index: 1200;
     background: white;
-
     padding: 18px;
-
     border-radius: 10px;
-
     box-shadow: 0 5px 20px #00000030;
-
     display: none;
 }
 
@@ -398,10 +407,8 @@ html, body {
 .search-panel input {
     width: 100%;
     padding: 13px;
-
     border: 1px solid #ddd;
     border-radius: 7px;
-
     outline: none;
 }
 
@@ -417,12 +424,9 @@ html, body {
 .menu-panel button {
     display: block;
     width: 100%;
-
     padding: 12px;
-
     border: none;
     background: transparent;
-
     text-align: left;
     cursor: pointer;
 }
@@ -442,39 +446,261 @@ html, body {
 }
 
 
-/* =================================
+/* =============================================
    STATUS MESSAGE
-================================= */
+============================================= */
 
 .status-message {
     position: absolute;
-
     bottom: 100px;
     left: 50%;
-
     transform: translateX(-50%);
-
     background: #26352c;
     color: white;
-
     padding: 12px 18px;
-
     border-radius: 8px;
-
     font-size: 12px;
-
     display: none;
-
-    z-index: 150;
-
+    z-index: 600;
     width: max-content;
     max-width: 85%;
 }
 
+.status-message.visible {
+    display: block;
+}
 
-/* =================================
+
+/* =============================================
+   ADD WAYPOINT MODAL
+============================================= */
+
+.waypoint-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.55);
+}
+
+.waypoint-modal.hidden {
+    display: none;
+}
+
+.waypoint-modal-content {
+    width: 100%;
+    max-width: 380px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 24px;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+}
+
+.waypoint-modal-content h3 {
+    margin: 0 0 8px;
+    color: #e83939;
+}
+
+.waypoint-modal-content p {
+    margin-bottom: 20px;
+    color: #666;
+    font-size: 14px;
+}
+
+.waypoint-modal-content label {
+    display: block;
+    margin: 12px 0 6px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.waypoint-modal-content input,
+.waypoint-modal-content textarea {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    font: inherit;
+}
+
+.waypoint-modal-content textarea {
+    min-height: 85px;
+    resize: vertical;
+}
+
+.waypoint-modal-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.waypoint-modal-buttons button {
+    flex: 1;
+    padding: 12px 8px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#cancelWaypoint {
+    background: #eee;
+    color: #333;
+}
+
+#saveWaypoint {
+    background: #e83939;
+    color: white;
+}
+
+
+/* =============================================
+   DELETE CONFIRMATION MODAL
+============================================= */
+
+.delete-confirm-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+}
+
+.delete-confirm-modal.hidden {
+    display: none;
+}
+
+.delete-confirm-content {
+    width: 100%;
+    max-width: 360px;
+    padding: 28px 24px;
+    background: white;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+    animation: deleteModalAppear 0.2s ease;
+}
+
+.delete-confirm-icon {
+    width: 55px;
+    height: 55px;
+    margin: 0 auto 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff0f0;
+    color: #e83939;
+    border-radius: 50%;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.delete-confirm-content h3 {
+    margin: 0 0 10px;
+    color: #292929;
+    font-size: 21px;
+}
+
+.delete-confirm-content p {
+    margin: 0 0 24px;
+    color: #777;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.delete-confirm-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.delete-confirm-buttons button {
+    flex: 1;
+    min-height: 44px;
+    border: none;
+    border-radius: 9px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#cancelDelete {
+    background: #eee;
+    color: #444;
+}
+
+#confirmDelete {
+    background: #e83939;
+    color: white;
+}
+
+#confirmDelete:hover {
+    background: #ca2929;
+}
+
+#cancelDelete:hover {
+    background: #ddd;
+}
+
+@keyframes deleteModalAppear {
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+/* =============================================
+   WAYPOINT MANAGEMENT CURSORS
+============================================= */
+
+/* ADD MODE */
+.waypoint-positioning-active,
+.waypoint-positioning-active * {
+    cursor: crosshair !important;
+}
+
+/* EDIT MODE */
+.waypoint-editing-active,
+.waypoint-editing-active * {
+    cursor: crosshair !important;
+}
+
+/* REMOVE MODE */
+.waypoint-removal-active,
+.waypoint-removal-active * {
+    cursor: crosshair !important;
+}
+
+/* =============================================
+   GENERAL UTILITIES
+============================================= */
+
+.hidden {
+    display: none !important;
+}
+
+.map-placeholder-message {
+    display: none;
+}
+
+
+/* =============================================
    MOBILE ADJUSTMENTS
-================================= */
+============================================= */
 
 @media (max-width: 600px) {
 
@@ -487,16 +713,24 @@ html, body {
         top: 100px;
     }
 
+    .location-card {
+        max-height: 75%;
+    }
+
+    .location-photo {
+        height: 230px;
+    }
+
+    .location-card-content {
+        padding-bottom: 30px;
+    }
+
     .mascot-container {
         bottom: 115px;
     }
 
-    .location-card {
-        bottom: 105px;
+    .locate-button {
+        width: 65px;
+        height: 65px;
     }
-
-}
-
-.map-placeholder-message {
-    display: none;
 }

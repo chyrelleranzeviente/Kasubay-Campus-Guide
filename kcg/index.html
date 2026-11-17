@@ -1,126 +1,201 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>KasUbAy | UA Campus Guide</title>
 
     <link rel="stylesheet" href="css/style.css">
-
-    <link
-        rel="stylesheet"
-        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    />     
-    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 </head>
 
 <body>
 
-    <!-- TOP NAVIGATION -->
+    <!-- HEADER -->
     <header class="navbar">
-
-        <button class="header-button" id="searchToggle"
-            aria-label="Search locations">
+        <button class="header-button" id="searchToggle" aria-label="Search locations">
             <span class="search-icon"></span>
         </button>
 
         <div class="university-logo">
-            UA
+            <img src="assets/pics/University_of_Antique_Seal.png" alt="University of Antique">
         </div>
 
-        <button class="header-button hamburger"
-            id="menuToggle" aria-label="Open menu">
+        <button class="header-button hamburger" id="menuToggle" aria-label="Open menu">
             <span></span>
             <span></span>
             <span></span>
         </button>
-
     </header>
 
 
-    <!-- SEARCH PANEL -->
+    <!-- SEARCH -->
     <div class="search-panel" id="searchPanel">
-
         <input
             type="search"
             id="locationSearch"
             placeholder="Search campus locations..."
             autocomplete="off"
         >
-
         <div id="searchResults"></div>
-
     </div>
 
 
-    <!-- MENU PANEL -->
+    <!-- MENU -->
     <div class="menu-panel" id="menuPanel">
-
         <h3>KasUbAy</h3>
-
+        <button id="addWaypointButton">Add Campus Waypoint</button>
+        <button id="editWaypointButton">Edit Campus Waypoint</button>
+        <button id="removeWaypointButton">Remove Campus Waypoint</button>
         <button id="aboutButton">About KasUbAy</button>
         <button id="resetButton">Reset Map</button>
-
     </div>
 
 
-    <!-- MAIN CAMPUS MAP -->
+    <!-- MAP -->
     <main class="map-container" id="mapContainer">
 
         <div class="campus-map" id="campusMap"></div>
 
 
-        <!-- LOCATION INFORMATION -->
-        <div class="location-card hidden" id="locationCard">
+        <!-- LOCATION INFORMATION PANEL -->
+        <section class="location-card hidden" id="locationCard">
 
-            <button class="close-card" id="closeCard">×</button>
+            <button
+                type="button"
+                class="location-panel-toggle"
+                id="toggleLocationCard"
+                aria-label="Collapse location information"
+            >
+                <span class="panel-chevron"></span>
+            </button>
 
-            <p class="card-label">CAMPUS LOCATION</p>
+            <div class="location-card-content" id="locationCardContent">
 
-            <h3 id="locationName">Location Name</h3>
+                <img
+                    id="locationPhoto"
+                    class="location-photo hidden"
+                    src=""
+                    alt="Campus location"
+                >
 
-            <p id="locationDescription">
-                Location description goes here.
-            </p>
+                <div class="location-details">
 
-        </div>
+                    <h3 id="locationName">Location Name</h3>
 
+                    <p id="locationDescription" class="location-description"></p>
 
-        <!-- MASCOT GUIDANCE -->
-        <div class="mascot-container">
+                    <div class="location-info-row">
+                        <span class="info-icon">◷</span>
+                        <p id="locationHours">Opening hours unavailable</p>
+                    </div>
 
-            <div class="mascot-placeholder">
-                UA
+                    <div class="location-info-row">
+                        <span class="info-icon">⌖</span>
+                        <p id="locationAddress">Address unavailable</p>
+                    </div>
+
+                </div>
             </div>
+        </section>
 
+
+        <!-- MASCOT -->
+        <div class="mascot-container" id="mascotContainer">
+            <div class="mascot-placeholder">UA</div>
             <div class="mascot-tooltip">
-                Tap a marker to explore
-                campus locations!
+                Tap a marker to explore campus locations!
             </div>
-
         </div>
 
 
-        <!-- CURRENT LOCATION CONTROL -->
-        <button class="locate-button" id="locateButton"
-            aria-label="Identify current location">
-
+        <!-- CURRENT LOCATION BUTTON -->
+        <button class="locate-button" id="locateButton" aria-label="Identify current location">
             <span class="locate-circle"></span>
-
         </button>
 
 
-        <!-- STATUS MESSAGE -->
+        <!-- STATUS -->
         <div class="status-message" id="statusMessage"></div>
 
     </main>
 
-<!-- magic sauce-->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
+    <!-- ADD WAYPOINT MODAL -->
+    <div class="waypoint-modal hidden" id="waypointModal">
+        <div class="waypoint-modal-content">
+
+            <h3>Add Campus Location</h3>
+            <p>Enter the details for this location.</p>
+
+            <label for="waypointName">Building Name</label>
+            <input
+                type="text"
+                id="waypointName"
+                placeholder="e.g. University Library"
+                required
+            >
+
+            <label for="waypointDescription">Description</label>
+            <textarea
+                id="waypointDescription"
+                placeholder="Brief description of this location"
+            ></textarea>
+
+            <label for="waypointPhoto">Photo URL or image path</label>
+            <input
+                type="text"
+                id="waypointPhoto"
+                placeholder="e.g. assets/pics/library.jpg"
+            >
+
+            <label for="waypointHours">Opening Hours</label>
+            <input
+                type="text"
+                id="waypointHours"
+                placeholder="e.g. Mon - Sat, 5 AM - 8 PM"
+            >
+
+            <label for="waypointAddress">Address</label>
+            <input
+                type="text"
+                id="waypointAddress"
+                placeholder="e.g. University of Antique Main Campus"
+            >
+
+            <div class="waypoint-modal-buttons">
+                <button type="button" id="cancelWaypoint">Cancel</button>
+                <button type="button" id="saveWaypoint">Save Waypoint</button>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- DELETE CONFIRMATION -->
+    <div class="delete-confirm-modal hidden" id="deleteConfirmModal">
+        <div class="delete-confirm-content">
+
+            <div class="delete-confirm-icon">!</div>
+
+            <h3>Delete Waypoint?</h3>
+
+            <p id="deleteConfirmMessage">
+                Are you sure you want to delete this waypoint?
+            </p>
+
+            <div class="delete-confirm-buttons">
+                <button type="button" id="cancelDelete">Cancel</button>
+                <button type="button" id="confirmDelete">Delete Waypoint</button>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- SCRIPTS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="js/locations.js"></script>
     <script src="js/map.js"></script>
     <script src="js/app.js"></script>
